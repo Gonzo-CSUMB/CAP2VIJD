@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+  metadata:
+    labels:
+      app.kubernetes.io/name: cicd-vijd
+      app.kubernetes.io/instance: cicd-vijd-instance
+      app.kubernetes.io/version: '1.0.0'
+      app.kubernetes.io/managed-by: kubectl
+    name: cicd-vijd-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cicd-vijd
+  template:
+    metadata:
+      labels:
+        app: cicd-vijd
+  spec:
+    containers:
+      - image: 962804699607.dkr.ecr.us-west-2.amazonaws.com/repo-vijd:latest
+      imagePullPolicy: Always
+      name: cicd-vijd
+      ports:
+        - containerPort: 80
